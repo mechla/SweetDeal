@@ -1,8 +1,18 @@
 package
 {
 	
+	import comunication.Data;
+	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
+	
+	import view_objects.ActionView;
+	import view_objects.AnswerView;
+	import view_objects.Board;
+	import view_objects.Counter;
+	import view_objects.Dice;
+	import view_objects.Menu;
+	import view_objects.Question;
 	
 	public class Game extends MovieClip
 	{
@@ -12,10 +22,12 @@ package
 		private var _counter:Counter;
 		private var _dice:Dice;
 		private var _question:Question;
+		private var _answer_corr:AnswerView;
+		private var _action_popup:ActionView;
 		private var _menu:Menu;
 		private var _current_position:int = 0;
 		private var _data:Data = new Data();
-		private var _test_mode:Boolean = true;
+		private var _test_mode:Boolean = false;
 		public function Game()
 		{
 			
@@ -31,6 +43,8 @@ package
 			_counter.putOnField(_data.position);
 			_dice = new Dice(this,true);
 			_question = new Question(this);
+			_answer_corr = new AnswerView(this);
+			_action_popup =  new ActionView(this);
 			
 		}
 
@@ -67,6 +81,16 @@ package
 		public function set menu(value:Menu):void
 		{
 			_menu = value;
+		}
+
+		public function get answer_corr():AnswerView
+		{
+			return _answer_corr;
+		}
+
+		public function get action_popup():ActionView
+		{
+			return _action_popup;
 		}
 
 

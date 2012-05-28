@@ -38,14 +38,18 @@ package
 		}
 		private function loaderComplete(myEvent:Event):void {
 			var paramObj:Object = LoaderInfo(this.root.loaderInfo).parameters;
-			if ((paramObj['gameId'] != undefined)) {
-				Game.instance().data.gameId = paramObj['gameId']
+			if ((paramObj['position'] != undefined)) {
 				Game.instance().data.position = paramObj['position']
-				Game.instance().data.position = paramObj['throws']
+				Game.instance().data.throws = paramObj['throws']
 			} else {
-				Game.instance().data.position = 0
-				Game.instance().data.gameId = '199';
-				Game.instance().data.throws = '1';
+				Game.instance().data.position = 0;
+				Game.instance().data.throws = 1;
+			}
+			if ((paramObj['friends'] != undefined)) {
+				Game.instance().data.friends = paramObj['friends']
+			}
+			else{
+				Game.instance().data.friends = [{"name":"Marcin Krykwiński","url":"http/"},{"name":"Anna Mechlińska","url":"http/"}];
 			}
 			
 			addChild(Game.instance());
