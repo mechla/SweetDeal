@@ -22,21 +22,26 @@ package view_objects
 			_counter.y = _fields[index][1];
 		}
 		public function moveCounter(start:int,new_position:int,back:Boolean = false):void{
-			
+			if(start >31)
+				start = start -32
 			var count:int;
 			if(!back){
 				if (new_position>start)
 					count = new_position - start;
-				else
+				else if(new_position>start)
 					count = (31-start)+new_position;
-				trace("START",start, new_position);
+				else 
+					count = 0;
 				tweenCounter(start,count);
+				trace("START",start, new_position);
 			}
 			else{
 				if (new_position<start)
 					count = start - new_position;
-				else
+				else if (new_position>start)
 					count = (31-new_position)+start;
+				else
+					count = 0;
 				trace("START",start, new_position);
 				tweenCounterBack(start,count);
 				
@@ -70,13 +75,15 @@ package view_objects
 		}
 		private function counterFinishMove():void{
 			//decide what to do?
-			Game.instance().data.QUESTION
 			if(Game.instance().data.ACTION == Game.instance().data.QUESTION)
 				Game.instance().question.show();
-			else if(Game.instance().data.ACTION == "none")
+			else if(Game.instance().data.ACTION == "none"){
 				Game.instance().menu.addClickEvent();
+				Game.instance().data.roundFinish();
+			}
 			else
 				Game.instance().action_popup.show();
+			//			Game.instance().data.update_position();
 		}
 		private function createFields():void{
 			_fields.push([581,530]);//0

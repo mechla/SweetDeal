@@ -1,9 +1,10 @@
 package view_objects
 {
+	import assets.Button;
+	import assets.ShowObject;
+	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
-	import assets.ShowObject;
-	import assets.Button;
 	
 	public class AnswerView extends ShowObject
 	{
@@ -25,21 +26,26 @@ package view_objects
 			_good_answer.y = _stage_height/2;
 			addChild(_wrong_answer);
 			addChild(_good_answer);
-			_wrong_answer.addChild(_button_good);
-			_good_answer.addChild(_button_good);s
+			_wrong_answer.addChild(_button_bad);
+			_good_answer.addChild(_button_good);
 			_button_bad.addEventListeners(hide);
 			_button_good.addEventListeners(hide);
 			
 			
 		}
-		public function showWrong():void{
+		override public function hide(...params):void{
+			super.hide();
+			Game.instance().menu.addClickEvent();
+		}
+		public function showWrong(text:String):void{
 			_wrong_answer.visible = true;
 			_good_answer.visible = false;
 			super.show();
 		}
-		public function showGood():void{
+		public function showGood(text:String):void{
 			_wrong_answer.visible = false;
 			_good_answer.visible = true;
+			_good_answer.desc.text = text;
 			super.show();
 		}
 	}

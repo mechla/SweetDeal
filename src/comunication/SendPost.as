@@ -24,6 +24,7 @@ package comunication
 	{
 		private var _THROW_CUBE:String = "https://oxapps.pl/apps/sweetdeal/game/random";
 		private var _ANSWEAR:String = "https://oxapps.pl/apps/sweetdeal/game/answer";
+		private var _FRIENDS:String = "https://oxapps.pl/apps/sweetdeal/game/friends";
 		
 		private var _loader:URLLoader =  new URLLoader();
 		private var _request:URLRequest;
@@ -39,7 +40,7 @@ package comunication
 		}
 		
 		
-		public function sendPost(target:String,data:URLVariables = null, callback:Function = null, popup:Boolean = false):void{
+		public function sendPost(target:String,data:URLVariables = null, callback:Function = null, popup:Boolean = true):void{
 			_popup = popup;
 			_request = new URLRequest(target);
 			_request.data =  data;
@@ -58,12 +59,14 @@ package comunication
 				_loader.addEventListener(Event.COMPLETE, callback, false, 0, true);
 			_loader.load(_request);
 			startTimer();
+			Game.instance().console.showText("POST: "+target+" "+ data);
 			trace("POST: "+target+" "+ data);
 		}
 		private function renewPost(...args):void{
 			_unsuccefull_count++;
 			if (_unsuccefull_count >5){
 				if(_popup){
+					Game.instance().console.showText("Nastapiło rozsynchronizowanie z serwerem. Odśwież gre.");
 					Game.instance().action_popup.update("Uwaga","Nastapiło rozsynchronizowanie z serwerem. Odśwież gre.",refresh,1);
 					Game.instance().action_popup.show();
 				}
@@ -95,9 +98,10 @@ package comunication
 			_loader.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			_loader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			trace(evt.target.data);
-			Game.instance().action_popup.updateMessage("",evt.target.data);
-			Game.instance().action_popup.show();
+//			Game.instance().action_popup.updateMessage("ODPOWIEDZ SERWERA:",evt.target.data);
+//			Game.instance().action_popup.show();
 			trace("recive data end");
+			Game.instance().console.showText(evt.target.data);
 		}
 		
 		protected function onOpen(evt:Event):void {
@@ -132,6 +136,11 @@ package comunication
 		public function get ANSWEAR():String
 		{
 			return _ANSWEAR;
+		}
+
+		public function get FRIENDS():String
+		{
+			return _FRIENDS;
 		}
 		
 		

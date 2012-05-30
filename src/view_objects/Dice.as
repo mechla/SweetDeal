@@ -1,7 +1,8 @@
 package view_objects
 {
-	import flash.display.DisplayObjectContainer;
 	import assets.ShowObject;
+	
+	import flash.display.DisplayObjectContainer;
 	
 	public class Dice extends ShowObject
 	{
@@ -28,8 +29,10 @@ package view_objects
 			_dice1.gotoAndStop(dice1)
 			_dice2.gotoAndStop(dice2);
 			trace(Game.instance().data.position,position);
-			Game.instance().counter.moveCounter(Game.instance().data.position,position);
-			Game.instance().data.position = position;
+			if(Game.instance().data.ACTION != "none"){
+				Game.instance().counter.moveCounter(Game.instance().data.position,position);
+				Game.instance().data.position = position;
+			}
 			
 			
 		}

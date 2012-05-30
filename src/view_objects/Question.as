@@ -58,29 +58,31 @@ package view_objects
 				_answer2.removeEventListener(MouseEvent.CLICK, answerClicked);
 				_answer3.removeEventListener(MouseEvent.CLICK, answerClicked);
 				this.hide();
-				Game.instance().data.sendAnswer(_id,_answears[_user_answer-1][1]);
-				Game.instance().answer_corr.showGood();
+				trace(_user_answer);
+				Game.instance().data.sendAnswer(_id,_user_answer.toString());
+//				Game.instance().answer_corr.showGood();
 			}
 		}
 		public function addAnswear(answear:String,id:String):void{
 			_answears.push(new Answear(answear, id));
 		}
 		public function update(o:Object):void{
+//			{"id":"162","question":"?","answer":["1","2","3"]}
 			_user_answer=0;
 			_question = o.question;
-			_id = o.question_id;
-			_answears = new Array();
-			_answears.push([o.answer1.answer, o.answer1.id]);
-			_answears.push([o.answer2.answer, o.answer2.id]);
-			_answears.push([o.answer3.answer, o.answer3.id]);
+			_id = o.id;
+			_answears = o.answer
+//			_answears.push([o.answer1.answer, o.answer1.id]);
+//			_answears.push([o.answer2.answer, o.answer2.id]);
+//			_answears.push([o.answer3.answer, o.answer3.id]);
 			renderView();
 		}
 		private function renderView():void{
 			
 			_bg.question.text = _question;
-			_answer1.answer.text = _answears[0][0];
-			_answer2.answer.text = _answears[1][0];
-			_answer3.answer.text = _answears[2][0];
+			_answer1.answer.text = _answears[0];
+			_answer2.answer.text = _answears[1];
+			_answer3.answer.text = _answears[2];
 			
 			
 		}
