@@ -25,11 +25,12 @@ package comunication
 		private var _gameId:String;  //przychodzi we flashvars
 		private var _friends:Array = new Array();
 		private var _position:int;
+		private var _points:int =0;
 		private var _new_position:int;
 		private var _change_position:int;
 		private var _dice1:int;
 		private var _dice2:int;
-		private var _throws:int;
+		private var _throws:int =0;
 		private var _new_throws:int;
 		
 		private var _ACTION:String;
@@ -53,7 +54,6 @@ package comunication
 			for each (var o:Object in obj){
 				trace(o.name);
 				_friends.push(o);
-//				https://graph.facebook.com/[id_usera]/picture
 			}
 			Game.instance().menu.addFriends();
 		}
@@ -65,7 +65,7 @@ package comunication
 			var date:Date = new Date();
 			data.t = Math.round(date.getTime()/1000);
 			if(Game.instance().test_mode){
-				//				reciveQuestion({"dice1":1,"dice2":6,"position":"13","throws":"99","points":"240","question":null,"message":"Dzi\u0119ki skorzystaniu z oferty na SweetDeal odwiedzisz Hiszpani\u0119 40% taniej."});
+				//				reciveQuestion({"dice1":1,"dice2":6,"points":"10280","position":"13","throws":"99","points":"240","question":null,"message":"Dzi\u0119ki skorzystaniu z oferty na SweetDeal odwiedzisz Hiszpani\u0119 40% taniej."});
 				//				reciveQuestion({"dice1":3,"dice2":4,"position":7,"throws_left":0,"throws_obj":{"message":"Dostajesz dodatkowy rzut","new_throws_left":1}});
 				//				reciveQuestion({"dice1":3,"dice2":4,"position":7,"throws_left":0,"move_obj":{"message":"Cofasz sie o 3 pola","new_position":4}});
 				//				reciveQuestion({"dice1":3,"dice2":4,"position":7,"throws_left":0,"question_obj":{"question":"Do jakiej grupy zwierząt należy delfin?", "question_id": 123,"answer1":{"id":12,"answer":"Ryby"},"answer2":{"id":125,"answer":"Ssaki"},"answer3":{"id":44,"answer":"Płazy"}}});
@@ -84,6 +84,7 @@ package comunication
 					obj = JSON.decode(e.target.data)
 				_dice1 = obj.dice1;
 				_dice2 = obj.dice2;	
+				_points = obj.points;
 				_new_position =  _position+_dice1+_dice2;
 				_change_position = obj.position;
 				_new_throws = obj.throws;
@@ -95,22 +96,23 @@ package comunication
 				Game.instance().question.update(obj.question);
 				TweenLite.delayedCall(.5,stopDices,[obj.position]);
 			}
-			else if(_change_position != _new_position){
+				//			else if(_change_position != _new_position){
+			else{
 				_ACTION = _MOVE;
 				Game.instance().action_popup.update("",obj.message,updatePosition,_change_position);
 				TweenLite.delayedCall(.5,stopDices,[_new_position]);
 				
 			}
-			else if(_throws-1 != _new_throws){
-				_ACTION = _THROWS;
-				Game.instance().action_popup.update("",obj.message,updateThrows,_new_throws);
-				TweenLite.delayedCall(.5,stopDices,[_change_position]);
-			}
-				
-			else{
-				_ACTION = _NONE;
-				TweenLite.delayedCall(.5,stopDices,[_position]);
-			}
+			//			else if(_throws-1 != _new_throws){
+			//				_ACTION = _THROWS;
+			//				Game.instance().action_popup.update("",obj.message,updateThrows,_new_throws);
+			//				TweenLite.delayedCall(.5,stopDices,[_change_position]);
+			//			}
+			//				
+			//			else{
+			//				_ACTION = _NONE;
+			//				TweenLite.delayedCall(.5,stopDices,[_position]);
+			//			}
 		}
 		public function roundFinish():void{
 			_position = _change_position;
@@ -165,8 +167,11 @@ package comunication
 				obj = e;
 			else
 				obj = JSON.decode(e.target.data)
-			if(obj.correct == true)
+			if(obj.correct == true){
+				_points = obj.points
+				_throws = obj.throws;
 				Game.instance().answer_corr.showGood(obj.message);
+			}
 			else if (obj.correct == false)
 				Game.instance().answer_corr.showWrong(obj.message)
 			else
@@ -237,6 +242,16 @@ package comunication
 		public function set gameId(value:String):void
 		{
 			_gameId = value;
+		}
+		
+		public function get points():int
+		{
+			return _points;
+		}
+		
+		public function set points(value:int):void
+		{
+			_points = value;
 		}
 		
 		

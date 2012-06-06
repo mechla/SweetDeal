@@ -36,6 +36,7 @@ package view_objects
 		override public function hide(...params):void{
 			super.hide();
 			Game.instance().menu.addClickEvent();
+			Game.instance().menu.updateThrows(Game.instance().data.throws);
 		}
 		public function showWrong(text:String):void{
 			_wrong_answer.visible = true;

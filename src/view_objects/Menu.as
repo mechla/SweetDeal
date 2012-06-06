@@ -4,10 +4,13 @@ package view_objects
 	import assets.ShowObject;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
+	
+	import mx.controls.Menu;
 	
 	public class Menu extends ShowObject
 	{
@@ -47,24 +50,18 @@ package view_objects
 			_friends_container.addChild(_friends_bg)
 			var friends:Array = Game.instance().data.friends
 			if(friends.length > 0){
-				var friends_view:Sprite = new Sprite();
 				var posiition:int = 0;
 				var index:int = 5;
+				var friends_view:FriendsView =  new FriendsView(_friends_container,true);
+				var lenght:int = friends.length
 				for each(var f:Object in friends){
+					lenght--;
 					index--;
-					if(index>0){
-						trace(f.name)
-						var friend:friend_view = new friend_view()
-						friend.freind_name.text = f.name;
-						friend.y = posiition;
-						friends_view.addChild(friend);
-						posiition+=20;
-					}
-					
+					trace(f.name)
+					friends_view.createFriend(f,lenght==0);
 				}
 				friends_view.x = 653;
 				friends_view.y = 118;
-				_friends_container.addChild(friends_view);
 			}
 			else{
 				_no_friends.x = 643
@@ -73,13 +70,13 @@ package view_objects
 			}
 			
 			_invite_friends.x = 522
-			_invite_friends.y = -26
+			_invite_friends.y = 0;
 			_friends_container.addChild(_invite_friends);
 			_invite_friends.addEventListeners(inviteFriends);
 			
 		}
 		private function inviteFriends(e:MouseEvent):void{
-			ExternalInterface.call("inviteFriends()");
+			ExternalInterface.call("inviteFriends");
 		}
 		private function addThrowCube():void{
 			_throw_cube_button.x = 663;
@@ -89,6 +86,13 @@ package view_objects
 		}
 		public function addClickEvent():void{
 			_throw_cube_button.addEventListeners(throwClick);	
+			ExternalInterface.call("updatePoints",Game.instance().data.points)
+			try{
+				Game.instance().menu.updateThrows(Game.instance().data.throws);
+			}
+			catch(e:Error){
+				trace(e.message);
+			}
 		}
 		private function throwClick(e:MouseEvent):void{
 			if(Game.instance().data.throws>0){

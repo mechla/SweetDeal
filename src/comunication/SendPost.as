@@ -22,9 +22,9 @@ package comunication
 	
 	public class SendPost extends EventDispatcher
 	{
-		private var _THROW_CUBE:String = "https://oxapps.pl/apps/sweetdeal/game/random";
-		private var _ANSWEAR:String = "https://oxapps.pl/apps/sweetdeal/game/answer";
-		private var _FRIENDS:String = "https://oxapps.pl/apps/sweetdeal/game/friends";
+		private var _THROW_CUBE:String = "http://oxapps.pl/apps/sweetdeal/game/random";
+		private var _ANSWEAR:String = "http://oxapps.pl/apps/sweetdeal/game/answer";
+		private var _FRIENDS:String = "http://oxapps.pl/apps/sweetdeal/game/friends";
 		
 		private var _loader:URLLoader =  new URLLoader();
 		private var _request:URLRequest;
@@ -69,6 +69,7 @@ package comunication
 					Game.instance().console.showText("Nastapiło rozsynchronizowanie z serwerem. Odśwież gre.");
 					Game.instance().action_popup.update("Uwaga","Nastapiło rozsynchronizowanie z serwerem. Odśwież gre.",refresh,1);
 					Game.instance().action_popup.show();
+					Game.instance().dice.stopGame()
 				}
 				
 				trace("serwery nieczynne");

@@ -28,12 +28,16 @@ package view_objects
 		public function stopDices(dice1:int, dice2:int,position:int):void{
 			_dice1.gotoAndStop(dice1)
 			_dice2.gotoAndStop(dice2);
-			trace(Game.instance().data.position,position);
 			if(Game.instance().data.ACTION != "none"){
 				Game.instance().counter.moveCounter(Game.instance().data.position,position);
 				Game.instance().data.position = position;
 			}
 			
+			
+		}
+		public function stopGame():void{
+			_dice1.gotoAndStop(1);
+			_dice2.gotoAndStop(1);
 			
 		}
 	}

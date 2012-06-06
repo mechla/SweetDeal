@@ -49,7 +49,6 @@ package
 			_question = new Question(this);
 			_answer_corr = new AnswerView(this);
 			_action_popup =  new ActionView(this);
-//			this.setChildIndex(_help_popup,this.numChildren-1);
 			_console  = new ConsoleLog(this,true);
 			Game.instance().data.sendFriends();
 			

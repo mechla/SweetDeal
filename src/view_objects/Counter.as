@@ -22,53 +22,61 @@ package view_objects
 			_counter.y = _fields[index][1];
 		}
 		public function moveCounter(start:int,new_position:int,back:Boolean = false):void{
-			if(start >31)
-				start = start -32
+			if(new_position >31)
+				new_position = new_position -32
 			var count:int;
-			if(!back){
-				if (new_position>start)
-					count = new_position - start;
-				else if(new_position>start)
-					count = (31-start)+new_position;
-				else 
-					count = 0;
-				tweenCounter(start,count);
-				trace("START",start, new_position);
-			}
-			else{
-				if (new_position<start)
-					count = start - new_position;
-				else if (new_position>start)
-					count = (31-new_position)+start;
-				else
-					count = 0;
-				trace("START",start, new_position);
-				tweenCounterBack(start,count);
-				
-			}
+			//			if(!back){
+			if (new_position>start)
+				count = new_position - start;
+			else if(new_position<start)
+				count = (32-start)+new_position;
+			else 
+				count = 0;
+			tweenCounter(start,count);
+			trace("START",start, new_position);
+			//			}
+			//			else{
+			//				if (new_position<start)
+			//					count = start - new_position;
+			//				else if (new_position>start)
+			//					count = (31-new_position)+start;
+			//				else
+			//					count = 0;
+			//				trace("START",start, new_position);
+			//				tweenCounterBack(start,count);
+			//				
+			//			}
 		}
-		private function tweenCounterBack(index:int,count:int):void{
-			trace(index, count);
-			
-			if(index == 0) 
-				index = 31;
-			else index--;
-			if(count>0){
-				count--;
-				TweenLite.to(_counter,.5,{x:_fields[index][0],y:_fields[index][1], onComplete:tweenCounterBack, onCompleteParams:[index,count]});
-			}
-			else
-				counterFinishMove();
-		}
+		//		private function tweenCounterBack(index:int,count:int):void{
+		//			trace(index, count);
+		//			
+		//			if(index == 0) 
+		//				index = 31;
+		//			else index--;
+		//			if(count>0){
+		//				count--;
+		//				TweenLite.to(_counter,.5,{x:_fields[index][0],y:_fields[index][1], onComplete:tweenCounterBack, onCompleteParams:[index,count]});
+		//			}
+		//			else
+		//				counterFinishMove();
+		//		}
 		private function tweenCounter(index:int,count:int):void{
 			trace(index, count);
 			
-			if(index == 31) 
+			if(index == 31) {
 				index = 0;
+				Game.instance().help_popup.updateMessage("Minąłeś start!", "Otrzymyjesz 200 punktów!");
+				Game.instance().help_popup.show();
+				
+				//				Game.instance().menu.updateThrows(Game.instance().data.throws+2);
+				//				ExternalInterface.call("updatePoints",Game.instance().data.points)
+			}
 			else index++;
 			if(count>0){
 				count--;
-				TweenLite.to(_counter,.5,{x:_fields[index][0],y:_fields[index][1], onComplete:tweenCounter, onCompleteParams:[index,count]});
+				try{
+					TweenLite.to(_counter,.5,{x:_fields[index][0],y:_fields[index][1], onComplete:tweenCounter, onCompleteParams:[index,count]});
+				}catch(e:Error){}
 			}
 			else
 				counterFinishMove();
