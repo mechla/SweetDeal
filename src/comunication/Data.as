@@ -50,6 +50,7 @@ package comunication
 			sendFriends.sendPost(sendFriends.FRIENDS,data, reciveFriends,true);
 		}
 		private function reciveFriends(e:Object):void{
+			trace(e.target.data);
 			var obj:Array = JSON.decode(e.target.data);
 			for each (var o:Object in obj){
 				trace(o.name);
@@ -88,21 +89,27 @@ package comunication
 				_new_position =  _position+_dice1+_dice2;
 				_change_position = obj.position;
 				_new_throws = obj.throws;
+				
+				//				if(obj.can_play){
+				if(obj.question != null){
+					_ACTION = _QUESTION;
+					Game.instance().question.update(obj.question);
+					TweenLite.delayedCall(.5,stopDices,[obj.position]);
+				}
+					//			else if(_change_position != _new_position){
+				else{
+					_ACTION = _MOVE;
+					Game.instance().action_popup.update("",obj.message,updatePosition,_change_position);
+					TweenLite.delayedCall(.5,stopDices,[_new_position]);
+					
+				}
+				//				}else{
+				//					Game.instance().help_popup.updateMessage("",obj.message);
+				//					Game.instance().help_popup.show();
+				//					Game.instance().dice.stopGame();
+				//				}
 			}
 			catch(e:Error){}
-			
-			if(obj.question != null){
-				_ACTION = _QUESTION;
-				Game.instance().question.update(obj.question);
-				TweenLite.delayedCall(.5,stopDices,[obj.position]);
-			}
-				//			else if(_change_position != _new_position){
-			else{
-				_ACTION = _MOVE;
-				Game.instance().action_popup.update("",obj.message,updatePosition,_change_position);
-				TweenLite.delayedCall(.5,stopDices,[_new_position]);
-				
-			}
 			//			else if(_throws-1 != _new_throws){
 			//				_ACTION = _THROWS;
 			//				Game.instance().action_popup.update("",obj.message,updateThrows,_new_throws);

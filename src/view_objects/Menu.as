@@ -104,7 +104,7 @@ package view_objects
 					Game.instance().menu.updateThrows(Game.instance().data.throws)
 			}
 			else{
-				Game.instance().action_popup.updateMessage("Nie masz rzutów!", "Skończyły się rzuty, zagraj jutro lub zaproś zanjomych.");
+				Game.instance().action_popup.updateMessage("Nie masz rzutów!", "Skończyły się rzuty, zagraj jutro lub zaproś znajomych.");
 				Game.instance().action_popup.show();
 				trace("NIE MASZ JUZ RZUTÓW");
 				

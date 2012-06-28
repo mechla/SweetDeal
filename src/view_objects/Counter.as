@@ -65,7 +65,7 @@ package view_objects
 			
 			if(index == 31) {
 				index = 0;
-				Game.instance().help_popup.updateMessage("Minąłeś start!", "Otrzymyjesz 200 punktów!");
+				Game.instance().help_popup.updateMessage("Minąłeś start!", "Za przejście przez start otrzymujesz 200 pkt.");
 				Game.instance().help_popup.show();
 				
 				//				Game.instance().menu.updateThrows(Game.instance().data.throws+2);

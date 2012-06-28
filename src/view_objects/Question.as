@@ -32,7 +32,7 @@ package view_objects
 			addChild(_black_bg);
 			_bg.x = _stage_width/2;
 			_bg.y = _stage_height/2;
-			addChild(_bg)
+//			addChild(_bg)
 			_bg.addChild(_ok_button);
 			
 			_answer1.x = -34;

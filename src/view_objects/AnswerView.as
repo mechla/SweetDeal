@@ -19,7 +19,7 @@ package view_objects
 			_black_bg.graphics.beginFill(0x000000,.2);
 			_black_bg.graphics.drawRect(0,0,_stage_width,_stage_height);
 			_black_bg.graphics.endFill();
-			addChild(_black_bg);
+//			addChild(_black_bg);
 			_wrong_answer.x = _stage_width/2;
 			_wrong_answer.y = _stage_height/2;
 			_good_answer.x = _stage_width/2;
