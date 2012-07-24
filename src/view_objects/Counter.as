@@ -5,6 +5,7 @@ package view_objects
 	import com.greensock.TweenLite;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.external.ExternalInterface;
 	
 	public class Counter extends ShowObject
 	{
@@ -62,12 +63,10 @@ package view_objects
 		//		}
 		private function tweenCounter(index:int,count:int):void{
 			trace(index, count);
-			if(index ==0){
+			if(index ==0 && count != 0){
 				Game.instance().help_popup.updateMessage("Minąłeś start!", "Za przejście przez start otrzymujesz 200 pkt.");
 				Game.instance().help_popup.show();
-				
-				//				Game.instance().menu.updateThrows(Game.instance().data.throws+2);
-				//				ExternalInterface.call("updatePoints",Game.instance().data.points)
+				ExternalInterface.call("updatePoints",Game.instance().data.points+200)
 			}
 			index++;
 			if(index == 32) {

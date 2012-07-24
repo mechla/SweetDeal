@@ -24,6 +24,7 @@ package
 			else
 				addEventListener(Event.ADDED_TO_STAGE, init);
 		}
+		
 		private function init(...args):void{
 			
 			stage.align = StageAlign.TOP_LEFT;

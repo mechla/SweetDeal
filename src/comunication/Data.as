@@ -181,8 +181,7 @@ package comunication
 			}
 			else if (obj.correct == false)
 				Game.instance().answer_corr.showWrong(obj.message)
-			else
-				Game.instance().answer_corr.showGood("COS NIE TAK POSZŁO");
+		
 			
 			
 		}

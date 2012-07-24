@@ -79,7 +79,7 @@ package view_objects
 			ExternalInterface.call("inviteFriends");
 		}
 		private function addThrowCube():void{
-			_throw_cube_button.x = 663;
+			_throw_cube_button.x = 669;
 			_throw_cube_button.y = 418;
 			addChild(_throw_cube_button);
 			addClickEvent();
