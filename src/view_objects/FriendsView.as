@@ -17,10 +17,10 @@ package view_objects
 			super(pClip, canShow);
 		}
 		public function createFriend(f:Object,last:Boolean = false):void{
-			if(_count < 5){
+			if(_count < 7){
 				var friend:FriendView =  new FriendView(this,true);
-				if(_count==4)
-					last = true;
+//				if(_count==4)
+//					last = true;
 				friend.init(f,last)
 				friend.y = _position;
 				_position+=30;

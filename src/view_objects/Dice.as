@@ -26,8 +26,8 @@ package view_objects
 			_dice2.play();
 		}
 		public function stopDices(dice1:int, dice2:int,position:int):void{
-			_dice1.gotoAndStop(dice1)
-			_dice2.gotoAndStop(dice2);
+			_dice1.gotoAndStop(dice1*6)
+			_dice2.gotoAndStop(dice2*6);
 			if(Game.instance().data.ACTION != "none"){
 				Game.instance().counter.moveCounter(Game.instance().data.position,position);
 				Game.instance().data.position = position;

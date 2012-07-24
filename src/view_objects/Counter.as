@@ -62,16 +62,17 @@ package view_objects
 		//		}
 		private function tweenCounter(index:int,count:int):void{
 			trace(index, count);
-			
-			if(index == 31) {
-				index = 0;
+			if(index ==0){
 				Game.instance().help_popup.updateMessage("Minąłeś start!", "Za przejście przez start otrzymujesz 200 pkt.");
 				Game.instance().help_popup.show();
 				
 				//				Game.instance().menu.updateThrows(Game.instance().data.throws+2);
 				//				ExternalInterface.call("updatePoints",Game.instance().data.points)
 			}
-			else index++;
+			index++;
+			if(index == 32) {
+				index = 0;
+			}
 			if(count>0){
 				count--;
 				try{

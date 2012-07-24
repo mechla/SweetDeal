@@ -18,13 +18,11 @@ package
 	{
 		public function SweetDeal()
 		{
-			
 			super();
 			if(this.stage)
 				init();
 			else
 				addEventListener(Event.ADDED_TO_STAGE, init);
-			
 		}
 		private function init(...args):void{
 			
@@ -48,8 +46,8 @@ package
 				Game.instance().data.throws = paramObj['throws']
 				Game.instance().data.gameId = paramObj['game_id']
 			} else {
-				Game.instance().data.position = 25;
-				Game.instance().data.throws =100;
+				Game.instance().data.position = 1;
+				Game.instance().data.throws = 3;
 				Game.instance().data.gameId = "6";
 			}
 			if(paramObj['points'] != undefined){

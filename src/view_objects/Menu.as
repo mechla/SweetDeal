@@ -61,7 +61,7 @@ package view_objects
 					friends_view.createFriend(f,lenght==0);
 				}
 				friends_view.x = 653;
-				friends_view.y = 118;
+				friends_view.y = 88;
 			}
 			else{
 				_no_friends.x = 643
@@ -100,8 +100,8 @@ package view_objects
 				Game.instance().dice.throwDices();
 				Game.instance().data.sendThrowCubePost();
 				Game.instance().dice.throwDices();
-				Game.instance().data.throws --
-					Game.instance().menu.updateThrows(Game.instance().data.throws)
+				Game.instance().data.throws --;
+				Game.instance().menu.updateThrows(Game.instance().data.throws)
 			}
 			else{
 				Game.instance().action_popup.updateMessage("Nie masz rzutów!", "Skończyły się rzuty, zagraj jutro lub zaproś znajomych.");
